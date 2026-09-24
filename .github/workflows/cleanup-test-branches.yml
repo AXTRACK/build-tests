@@ -1,0 +1,49 @@
+name: cleanup ephemeral test branches
+
+on:
+  workflow_run:
+    workflows:
+      - build
+    types:
+      - completed
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  cleanup-completed:
+    if: github.event_name == 'workflow_run' && startsWith(github.event.workflow_run.head_branch, 'test/')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete completed test branch
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+          TEST_BRANCH: ${{ github.event.workflow_run.head_branch }}
+        run: |
+          set -euo pipefail
+          ref="heads/${TEST_BRANCH}"
+          if gh api "repos/${REPOSITORY}/git/ref/${ref}" >/dev/null 2>&1; then
+            gh api --method DELETE "repos/${REPOSITORY}/git/refs/${ref}"
+          fi
+
+  cleanup-stale:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete stale test branches
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          gh api --paginate "repos/${REPOSITORY}/git/matching-refs/heads/test/"             --jq '.[].ref' |
+            while IFS= read -r ref; do
+              [ -z "${ref}" ] && continue
+              gh api --method DELETE "repos/${REPOSITORY}/git/refs/${ref}"
+            done

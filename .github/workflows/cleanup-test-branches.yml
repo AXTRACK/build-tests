@@ -45,5 +45,6 @@ jobs:
           gh api --paginate "repos/${REPOSITORY}/git/matching-refs/heads/test/"             --jq '.[].ref' |
             while IFS= read -r ref; do
               [ -z "${ref}" ] && continue
-              gh api --method DELETE "repos/${REPOSITORY}/git/refs/${ref}"
+              delete_ref="${ref#refs/}"
+              gh api --method DELETE "repos/${REPOSITORY}/git/refs/${delete_ref}"
             done

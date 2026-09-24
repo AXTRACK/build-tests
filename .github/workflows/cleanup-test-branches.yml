@@ -9,14 +9,22 @@ on:
   push:
     branches:
       - main
+  schedule:
+    - cron: '17 3 * * *'
+  workflow_dispatch:
 
 permissions:
   contents: write
+
+concurrency:
+  group: cleanup-ephemeral-test-branches
+  cancel-in-progress: false
 
 jobs:
   cleanup-completed:
     if: github.event_name == 'workflow_run' && startsWith(github.event.workflow_run.head_branch, 'test/')
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     steps:
       - name: Delete completed test branch
         shell: bash
@@ -32,19 +40,28 @@ jobs:
           fi
 
   cleanup-stale:
-    if: github.event_name == 'push'
+    if: github.event_name == 'push' || github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     steps:
       - name: Delete stale test branches
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
           REPOSITORY: ${{ github.repository }}
+          STALE_HOURS: '48'
         run: |
           set -euo pipefail
-          gh api --paginate "repos/${REPOSITORY}/git/matching-refs/heads/test/"             --jq '.[].ref' |
+          cutoff_epoch=$(( $(date -u +%s) - STALE_HOURS * 3600 ))
+          gh api --paginate "repos/${REPOSITORY}/git/matching-refs/heads/test/" --jq '.[].ref' |
             while IFS= read -r ref; do
               [ -z "${ref}" ] && continue
-              delete_ref="${ref#refs/}"
-              gh api --method DELETE "repos/${REPOSITORY}/git/refs/${delete_ref}"
+              branch="${ref#refs/heads/}"
+              encoded_branch=$(python3 -c 'import sys,urllib.parse; print(urllib.parse.quote(sys.argv[1], safe=""))' "${branch}")
+              committed_at=$(gh api "repos/${REPOSITORY}/commits/${encoded_branch}" --jq '.commit.committer.date')
+              committed_epoch=$(date -u -d "${committed_at}" +%s)
+              if [ "${committed_epoch}" -lt "${cutoff_epoch}" ]; then
+                delete_ref="${ref#refs/}"
+                gh api --method DELETE "repos/${REPOSITORY}/git/refs/${delete_ref}"
+              fi
             done

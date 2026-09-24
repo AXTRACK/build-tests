@@ -33,7 +33,7 @@ jobs:
         run: |
           set -euo pipefail
           ref="heads/$TEST_BRANCH"
-          encoded_ref=$(python3 -c 'import os, urllib.parse; print(urllib.parse.quote(os.environ["REF"], safe=""))' REF="$ref")
+          encoded_ref=$(REF="$ref" python3 -c 'import os,urllib.parse; print(urllib.parse.quote(os.environ["REF"], safe=""))')
           status=$(curl --silent --show-error --output response.txt --write-out '%{http_code}' \
             --request DELETE \
             --header "Accept: application/vnd.github+json" \

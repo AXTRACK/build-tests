@@ -1,0 +1,6 @@
+{
+  "scopeId": "nas-chatgpt-mcp-baseline",
+  "sourceSha": "f0a9cbc4dcedc3e8a9abb90764a22eee484c3c78",
+  "bundleDigest": "tree:9d6f7c6b067d46edbd58865ad0d4ede006f78af3",
+  "runner": "nas-chatgpt-mcp-test.ps1"
+}

@@ -45,7 +45,8 @@
     "web"
   ],
   "readerEntryPoints": [
-    "README.md"
+    "README.md",
+    "knowledge/README.md"
   ],
   "reachabilityRequiredRoots": [
     "showcase",

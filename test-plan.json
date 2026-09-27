@@ -1,6 +1,6 @@
 {
   "scopeId": "technical-architect-kb-quality-gate",
-  "sourceSha": "904ba3f97987cf1ead0f0ed806a1a3dc6c064806",
-  "bundleDigest": "synthetic-kb-quality-gate-v1",
+  "sourceSha": "8ad7773b2a805e4d08e0a54c47b27c684d368a02",
+  "bundleDigest": "synthetic-kb-quality-gate-v2",
   "runner": "run-quality.ps1"
 }

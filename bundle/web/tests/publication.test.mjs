@@ -80,6 +80,23 @@ test('reader page linking to catalog fails the transitive boundary', async () =>
   );
 });
 
+test('missing relative reader targets fail closed', async () => {
+  await withFixture(
+    {
+      'README.md': '# Home\n[Missing](knowledge/missing.md)',
+      'ABOUT.md': '# About',
+      'THIRD_PARTY_NOTICES.md': '# Notices'
+    },
+    async (root) => {
+      const files = await collectAllowedFiles(root, config);
+      const violations = await validateTransitiveLinks(root, files, config);
+      assert.equal(violations.length, 1);
+      assert.equal(violations[0].reason, 'MISSING');
+      assert.equal(violations[0].target, 'knowledge/missing.md');
+    }
+  );
+});
+
 test('reader page linking outside repository fails closed', async () => {
   await withFixture(
     {

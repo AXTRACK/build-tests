@@ -1,0 +1,109 @@
+{
+  "schemaVersion": 1,
+  "rootFiles": [
+    "README.md",
+    "ABOUT.md",
+    "THIRD_PARTY_NOTICES.md"
+  ],
+  "roots": [
+    {
+      "path": "showcase",
+      "extensions": [
+        ".md"
+      ]
+    },
+    {
+      "path": "knowledge",
+      "extensions": [
+        ".md"
+      ]
+    },
+    {
+      "path": "examples",
+      "extensions": [
+        ".md"
+      ]
+    },
+    {
+      "path": "templates",
+      "extensions": [
+        ".md"
+      ]
+    },
+    {
+      "path": "assets/icons/tabler",
+      "extensions": [
+        ".svg"
+      ]
+    }
+  ],
+  "forbiddenRoots": [
+    ".git",
+    ".github",
+    "catalog",
+    "sources",
+    "web"
+  ],
+  "readerEntryPoints": [
+    "README.md"
+  ],
+  "reachabilityRequiredRoots": [
+    "showcase",
+    "knowledge",
+    "examples",
+    "templates"
+  ],
+  "compatibilityPages": [
+    "knowledge/architecture/d365fo-data-lifecycle-and-analytics.md",
+    "knowledge/architecture/d365fo-performance-and-observability.md",
+    "knowledge/ai/agent-tool-and-knowledge-architecture.md"
+  ],
+  "quickNavigation": {
+    "items": [
+      {
+        "label": "Guided Tour",
+        "path": "showcase/README.md"
+      },
+      {
+        "label": "Decision Router",
+        "path": "knowledge/decision-router.md"
+      },
+      {
+        "label": "Domains",
+        "path": "knowledge/domains.md"
+      },
+      {
+        "label": "Topics",
+        "path": "knowledge/topics.md"
+      },
+      {
+        "label": "Reading Paths",
+        "path": "knowledge/reading-paths.md"
+      },
+      {
+        "label": "Examples",
+        "path": "examples/README.md"
+      },
+      {
+        "label": "Templates",
+        "path": "templates/README.md"
+      },
+      {
+        "label": "Glossary",
+        "path": "knowledge/glossary.md"
+      }
+    ],
+    "surfaces": [
+      "ABOUT.md",
+      "showcase/README.md",
+      "knowledge/README.md",
+      "knowledge/decision-router.md",
+      "knowledge/domains.md",
+      "knowledge/topics.md",
+      "knowledge/reading-paths.md",
+      "knowledge/glossary.md",
+      "examples/README.md",
+      "templates/README.md"
+    ]
+  }
+}

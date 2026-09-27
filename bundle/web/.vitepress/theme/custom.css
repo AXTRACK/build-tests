@@ -1,0 +1,31 @@
+:root {
+  --vp-layout-max-width: 1540px;
+}
+
+.VPDoc.has-aside .content-container {
+  max-width: 920px;
+}
+
+.vp-doc table {
+  display: table;
+  width: 100%;
+}
+
+.vp-doc img[src*='/assets/icons/'],
+.vp-doc img[src^='assets/icons/'],
+.vp-doc img[src^='../assets/icons/'],
+.vp-doc img[src^='../../assets/icons/'] {
+  display: inline-block;
+  margin: 0;
+  vertical-align: text-bottom;
+}
+
+.vp-doc details {
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+}
+
+.vp-doc details + details {
+  margin-top: 0.75rem;
+}

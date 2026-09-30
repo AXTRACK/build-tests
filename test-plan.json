@@ -1,0 +1,6 @@
+{
+  "scopeId": "fast-mcp-telegram-image-build",
+  "sourceSha": "c3779a2f4abf093b8fac9d6776b5ad097ff73df5",
+  "bundleDigest": "fast-mcp-telegram-linux-amd64-v1",
+  "runner": "infra/fast-mcp-telegram/build.sh"
+}

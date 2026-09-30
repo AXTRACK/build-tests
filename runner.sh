@@ -36,9 +36,6 @@ docker image inspect ghcr.io/axtrack/fast-mcp-telegram:c3779a2f-amd64 >/dev/null
 docker image inspect ghcr.io/axtrack/telegram-bot-api:e3e9dd8e-amd64 >/dev/null
 echo "IMAGE_LOAD_PASS"
 
-echo "== Prepare persistent layout =="
-bash prepare-directories.sh
-
 echo "== Execute real installer until unavoidable QR gate =="
 set +e
 SKIP_IMAGE_LOAD=1 bash scripts/install.sh >"$WORK/install-first.log" 2>&1

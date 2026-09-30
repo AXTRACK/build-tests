@@ -1,0 +1,6 @@
+{
+  "scopeId": "agent-notify-nas-bundle",
+  "sourceSha": "bundle-v1",
+  "bundleDigest": "agent-notify-nas-bundle-v1",
+  "runner": "infra/nas-bundle/build.sh"
+}

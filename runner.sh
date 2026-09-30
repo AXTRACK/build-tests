@@ -49,7 +49,7 @@ echo "QR_GATE_PASS"
 echo "== Confirm Local Bot API container creation and binary =="
 docker compose -f compose.yaml ps -a telegram-bot-api
 docker inspect agent-notify-telegram-bot-api >/dev/null
-docker run --rm --entrypoint /usr/local/bin/telegram-bot-api ghcr.io/axtrack/telegram-bot-api:e3e9dd8e-amd64 --version | grep -q 'Bot API'
+docker run --rm --entrypoint /usr/local/bin/telegram-bot-api ghcr.io/axtrack/telegram-bot-api:e3e9dd8e-amd64 --version 2>&1 | grep -q 'Bot API'
 echo "LOCAL_BOT_CONTAINER_CREATE_PASS"
 echo "LOCAL_BOT_BINARY_PASS"
 echo "NOTE: long-running Local Bot API health cannot be proven with dummy API_ID/API_HASH."

@@ -1,0 +1,22 @@
+# Fail-closed starter ACL.
+#
+# Before starting telegram-mcp in http-auth mode, replace the placeholder
+# principal with the actual principal/token identity produced by the selected
+# fast-mcp-telegram setup flow.
+#
+# Keep scheduled digest principals read-only.
+
+blocked_peers:
+  - 777000
+  - 93372553
+  - 178220800
+  - "@BotFather"
+  - "@SpamBot"
+
+principals:
+  REPLACE_WITH_DIGEST_PRINCIPAL:
+    chats:
+      - "me"
+    read_only: true
+    allow_global_search: false
+    allow_mtproto: false

@@ -46,11 +46,13 @@ cat "$WORK/install-first.log"
 grep -q 'MANUAL_GATE: Telegram user authorization is required.' "$WORK/install-first.log"
 echo "QR_GATE_PASS"
 
-echo "== Confirm Local Bot API actually runs after installer stage =="
-docker compose -f compose.yaml ps
-docker compose -f compose.yaml ps --status running telegram-bot-api | grep -q telegram-bot-api
-docker compose -f compose.yaml exec -T telegram-bot-api telegram-bot-api --version | grep -q 'Bot API'
-echo "LOCAL_BOT_RUNTIME_PASS"
+echo "== Confirm Local Bot API container creation and binary =="
+docker compose -f compose.yaml ps -a telegram-bot-api
+docker inspect agent-notify-telegram-bot-api >/dev/null
+docker run --rm --entrypoint /usr/local/bin/telegram-bot-api ghcr.io/axtrack/telegram-bot-api:e3e9dd8e-amd64 --version | grep -q 'Bot API'
+echo "LOCAL_BOT_CONTAINER_CREATE_PASS"
+echo "LOCAL_BOT_BINARY_PASS"
+echo "NOTE: long-running Local Bot API health cannot be proven with dummy API_ID/API_HASH."
 
 echo "== Verify fails closed before real Telegram session =="
 set +e

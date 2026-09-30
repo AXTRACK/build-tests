@@ -1,0 +1,27 @@
+config_version: 1
+
+control_plane:
+  base_url: https://api.openai.com
+  tunnel_id: REPLACE_WITH_TUNNEL_ID
+  api_key: env:CONTROL_PLANE_API_KEY
+
+log:
+  level: info
+  format: json
+  file: /data/logs/tunnel-client.ndjson
+
+health:
+  listen_addr: 127.0.0.1:8080
+
+admin_ui:
+  open_browser: false
+
+mcp:
+  server_urls:
+    - channel: main
+      url: http://telegram-mcp:8000/v1/mcp
+  extra_headers:
+    Authorization: env:LOCAL_MCP_AUTHORIZATION
+  startup_wait_timeout: 60s
+  connection_max_ttl: 10m
+  max_concurrent_requests: 10

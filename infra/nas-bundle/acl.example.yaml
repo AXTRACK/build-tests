@@ -1,0 +1,14 @@
+blocked_peers:
+  - 777000
+  - 93372553
+  - 178220800
+  - "@BotFather"
+  - "@SpamBot"
+
+principals:
+  REPLACE_WITH_DIGEST_PRINCIPAL:
+    chats:
+      - "me"
+    read_only: true
+    allow_global_search: false
+    allow_mtproto: false

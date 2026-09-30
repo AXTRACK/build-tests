@@ -11,8 +11,8 @@ info() { echo "== $* =="; }
 info "Bootstrap configuration"
 bash scripts/bootstrap.sh
 
-info "Preflight"
-bash scripts/preflight.sh
+info "Pre-authorization preflight"
+bash scripts/preflight.sh --preauth
 
 if [[ "${SKIP_IMAGE_LOAD:-0}" != "1" ]]; then
   info "Load pinned prebuilt images"
@@ -32,9 +32,6 @@ set +a
 
 : "${API_ID:?Fill API_ID in .env}"
 : "${API_HASH:?Fill API_HASH in .env}"
-
-info "Validate compose configuration"
-docker compose -f compose.yaml config >/dev/null
 
 info "Start Local Telegram Bot API"
 docker compose -f compose.yaml up -d telegram-bot-api
@@ -63,9 +60,8 @@ if grep -q 'REPLACE_WITH_DIGEST_PRINCIPAL' config/acl.yaml; then
   bash scripts/configure-acl-from-bearer.sh
 fi
 
-if grep -q 'REPLACE_WITH_DIGEST_PRINCIPAL' config/acl.yaml; then
-  fail "ACL principal placeholder still exists"
-fi
+info "Full preflight"
+bash scripts/preflight.sh
 
 info "Start Telegram MCP"
 docker compose -f compose.yaml up -d telegram-mcp

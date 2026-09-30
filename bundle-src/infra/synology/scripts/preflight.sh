@@ -1,6 +1,14 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+mode="full"
+if [[ "${1:-}" == "--preauth" ]]; then
+  mode="preauth"
+elif [[ -n "${1:-}" ]]; then
+  echo "Usage: $0 [--preauth]" >&2
+  exit 2
+fi
+
 fail=0
 
 required_files=(
@@ -30,16 +38,24 @@ if [[ -f .env ]]; then
   done
 fi
 
-if grep -q "REPLACE_WITH_DIGEST_PRINCIPAL" config/acl.yaml 2>/dev/null; then
+if [[ "$mode" == "full" ]] && grep -q "REPLACE_WITH_DIGEST_PRINCIPAL" config/acl.yaml 2>/dev/null; then
   echo "ACL_PLACEHOLDER_NOT_REPLACED"
   fail=1
 fi
 
 if [[ "$fail" -ne 0 ]]; then
-  echo "PREFLIGHT_BLOCKED"
+  if [[ "$mode" == "preauth" ]]; then
+    echo "PREAUTH_PREFLIGHT_BLOCKED"
+  else
+    echo "PREFLIGHT_BLOCKED"
+  fi
   exit 2
 fi
 
 docker compose -f compose.yaml config >/dev/null
 
-echo "PREFLIGHT_PASS"
+if [[ "$mode" == "preauth" ]]; then
+  echo "PREAUTH_PREFLIGHT_PASS"
+else
+  echo "PREFLIGHT_PASS"
+fi

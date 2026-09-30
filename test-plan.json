@@ -1,0 +1,6 @@
+{
+  "scopeId": "telegram-bot-api-build",
+  "sourceSha": "e3e9dd8e5b3d7ab8537cd5a10dc31d5ffa8f82d1",
+  "bundleDigest": "telegram-bot-api-linux-amd64-v1",
+  "runner": "infra/telegram-bot-api/build.sh"
+}

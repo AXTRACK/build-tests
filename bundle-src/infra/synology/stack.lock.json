@@ -1,0 +1,36 @@
+{
+  "target": {
+    "nas": "Synology DS918+",
+    "platform": "linux/amd64"
+  },
+  "components": {
+    "telegramBotApi": {
+      "image": "ghcr.io/axtrack/telegram-bot-api:e3e9dd8e-amd64",
+      "digest": "sha256:a2463d780fe35b508ce5f3551b292923a7edf87a7cb01b95d69664f4c6382370",
+      "upstream": "tdlib/telegram-bot-api",
+      "upstreamCommit": "e3e9dd8e5b3d7ab8537cd5a10dc31d5ffa8f82d1",
+      "version": "10.3",
+      "release": "https://github.com/AXTRACK/build-tests/releases/tag/telegram-bot-api-e3e9dd8e-amd64",
+      "archive": "telegram-bot-api-e3e9dd8e-linux-amd64.tar.gz",
+      "archiveSha256": "fcad2a7eceb1eb90811d38cb55ea9d66fff492047ab6731a6ffdf2c01295ca78"
+    },
+    "fastMcpTelegram": {
+      "image": "ghcr.io/axtrack/fast-mcp-telegram:c3779a2f-amd64",
+      "digest": "sha256:07b528cf9c759799f5f510f1ea2dce157f7fffe63ee79267ddd5414db11b8fca",
+      "upstream": "leshchenko1979/fast-mcp-telegram",
+      "upstreamCommit": "c3779a2f4abf093b8fac9d6776b5ad097ff73df5",
+      "release": "https://github.com/AXTRACK/build-tests/releases/tag/fast-mcp-telegram-c3779a2f-amd64",
+      "archive": "fast-mcp-telegram-c3779a2f-linux-amd64.tar.gz",
+      "archiveSha256": "cd9109969f39e77adad67c5d742e173da63da73d8ce5f1d62cd168ff98359c20"
+    },
+    "openaiTunnelClient": {
+      "image": "ghcr.io/axtrack/openai-tunnel-client:0.0.15-amd64",
+      "digest": "sha256:5b525e17055283aa6b66f1baac8df8fc4bd095ce9d2479ede9dbabaa43e96055",
+      "upstream": "openai/tunnel-client",
+      "upstreamTag": "v0.0.15",
+      "release": "https://github.com/AXTRACK/build-tests/releases/tag/openai-tunnel-client-0.0.15-amd64",
+      "archive": "openai-tunnel-client-0.0.15-linux-amd64.tar.gz",
+      "archiveSha256": "3b5e53e7e011a4a6b11c282515afab4723678f93804cd0961c193a382cba57eb"
+    }
+  }
+}

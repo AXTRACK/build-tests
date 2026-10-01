@@ -46,6 +46,15 @@
         "Tools/Tests/Test-PrivateTestExecutionFallback.ps1",
         "Tools/Tests/Scopes/Invoke-PrivateExecutionPolicyScope.ps1"
       ]
+    },
+    "actions-usage-audit": {
+      "runner": "Tools/Tests/Scopes/Invoke-ActionsUsageAuditScope.ps1",
+      "allowedPaths": [
+        "Tools/CI/ActionsUsageAudit.psm1",
+        "Tools/CI/Get-GitHubActionsUsageAudit.ps1",
+        "Tools/Tests/Test-GitHubActionsUsageAudit.ps1",
+        "Tools/Tests/Scopes/Invoke-ActionsUsageAuditScope.ps1"
+      ]
     }
   }
 }

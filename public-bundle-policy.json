@@ -1,0 +1,84 @@
+{
+  "schemaVersion": 1,
+  "baselinePaths": [
+    ".github/workflows/build.yml",
+    ".github/workflows/cleanup-test-branches.yml",
+    "runner.ps1",
+    "public-bundle-policy.json",
+    "test-plan.json"
+  ],
+  "scopes": {
+    "dependencies": {
+      "runner": "Tools/Tests/Scopes/Invoke-DependenciesScope.ps1",
+      "allowedPaths": [
+        "DEPENDENCIES.md",
+        "Tools/ninja-cli.json",
+        "Tools/NinjaOverlay/**",
+        "Tools/ninja-mcp.json",
+        "Tools/AzureDevOpsMcp/package.json",
+        "Tools/AzureDevOpsMcp/package-lock.json",
+        "Tools/Tests/Test-ThirdPartyDependencies.ps1",
+        "Tools/Tests/Scopes/Invoke-DependenciesScope.ps1",
+        ".github/renovate.json",
+        "Tools/Tests/Invoke-TestTaskPlan.ps1"
+      ]
+    },
+    "test-infrastructure": {
+      "runner": "Tools/Tests/Scopes/Invoke-TestInfrastructureScope.ps1",
+      "allowedPaths": [
+        "Tools/Tests/Invoke-TestTaskPlan.ps1",
+        "Tools/Tests/Test-TestTaskPlan.ps1",
+        "Tools/Tests/Scopes/Invoke-TestInfrastructureScope.ps1"
+      ]
+    },
+    "branch-lifecycle": {
+      "runner": "Tools/Tests/Scopes/Invoke-BranchLifecycleScope.ps1",
+      "allowedPaths": [
+        "Tools/Git/Get-BranchLifecycleAudit.ps1",
+        "Tools/Tests/Test-BranchLifecycleAudit.ps1",
+        "Tools/Tests/Scopes/Invoke-BranchLifecycleScope.ps1"
+      ]
+    },
+    "private-execution-policy": {
+      "runner": "Tools/Tests/Scopes/Invoke-PrivateExecutionPolicyScope.ps1",
+      "allowedPaths": [
+        "Tools/CI/Resolve-PrivateTestExecution.ps1",
+        "Tools/Tests/Test-PrivateTestExecutionFallback.ps1",
+        "Tools/Tests/Scopes/Invoke-PrivateExecutionPolicyScope.ps1"
+      ]
+    },
+    "actions-usage-audit": {
+      "runner": "Tools/Tests/Scopes/Invoke-ActionsUsageAuditScope.ps1",
+      "allowedPaths": [
+        "Tools/CI/ActionsUsageAudit.psm1",
+        "Tools/CI/Get-GitHubActionsUsageAudit.ps1",
+        "Tools/Tests/Test-GitHubActionsUsageAudit.ps1",
+        "Tools/Tests/Scopes/Invoke-ActionsUsageAuditScope.ps1"
+      ]
+    },
+    "exact-green-reuse": {
+      "runner": "Tools/Tests/Scopes/Invoke-ExactGreenReuseScope.ps1",
+      "allowedPaths": [
+        "Tools/CI/ExactGreenReuse.psm1",
+        "Tools/Tests/Test-ExactGreenReuse.ps1",
+        "Tools/Tests/Scopes/Invoke-ExactGreenReuseScope.ps1"
+      ]
+    },
+    "adaptive-ci-handoff": {
+      "runner": "Tools/Tests/Scopes/Invoke-AdaptiveCiHandoffScope.ps1",
+      "allowedPaths": [
+        "Tools/CI/AdaptiveCiHandoff.psm1",
+        "Tools/Tests/Test-AdaptiveCiHandoff.ps1",
+        "Tools/Tests/Scopes/Invoke-AdaptiveCiHandoffScope.ps1"
+      ]
+    },
+    "private-ci-circuit-breaker": {
+      "runner": "Tools/Tests/Scopes/Invoke-PrivateCiCircuitBreakerScope.ps1",
+      "allowedPaths": [
+        "Tools/CI/Resolve-PrivateTestExecution.ps1",
+        "Tools/Tests/Test-PrivateTestExecutionFallback.ps1",
+        "Tools/Tests/Scopes/Invoke-PrivateCiCircuitBreakerScope.ps1"
+      ]
+    }
+  }
+}

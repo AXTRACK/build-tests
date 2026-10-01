@@ -55,6 +55,14 @@
         "Tools/Tests/Test-GitHubActionsUsageAudit.ps1",
         "Tools/Tests/Scopes/Invoke-ActionsUsageAuditScope.ps1"
       ]
+    },
+    "exact-green-reuse": {
+      "runner": "Tools/Tests/Scopes/Invoke-ExactGreenReuseScope.ps1",
+      "allowedPaths": [
+        "Tools/CI/ExactGreenReuse.psm1",
+        "Tools/Tests/Test-ExactGreenReuse.ps1",
+        "Tools/Tests/Scopes/Invoke-ExactGreenReuseScope.ps1"
+      ]
     }
   }
 }

@@ -63,6 +63,14 @@
         "Tools/Tests/Test-ExactGreenReuse.ps1",
         "Tools/Tests/Scopes/Invoke-ExactGreenReuseScope.ps1"
       ]
+    },
+    "adaptive-ci-handoff": {
+      "runner": "Tools/Tests/Scopes/Invoke-AdaptiveCiHandoffScope.ps1",
+      "allowedPaths": [
+        "Tools/CI/AdaptiveCiHandoff.psm1",
+        "Tools/Tests/Test-AdaptiveCiHandoff.ps1",
+        "Tools/Tests/Scopes/Invoke-AdaptiveCiHandoffScope.ps1"
+      ]
     }
   }
 }

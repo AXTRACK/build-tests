@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "baselinePaths": [
+    ".github/workflows/build.yml",
+    ".github/workflows/cleanup-test-branches.yml",
+    "runner.ps1",
+    "public-bundle-policy.json",
+    "test-plan.json"
+  ],
+  "scopes": {
+    "dependencies": {
+      "runner": "Tools/Tests/Scopes/Invoke-DependenciesScope.ps1",
+      "allowedPaths": [
+        "DEPENDENCIES.md",
+        "Tools/ninja-cli.json",
+        "Tools/NinjaOverlay/**",
+        "Tools/ninja-mcp.json",
+        "Tools/AzureDevOpsMcp/package.json",
+        "Tools/AzureDevOpsMcp/package-lock.json",
+        "Tools/Tests/Test-ThirdPartyDependencies.ps1",
+        "Tools/Tests/Scopes/Invoke-DependenciesScope.ps1",
+        ".github/renovate.json",
+        "Tools/Tests/Invoke-TestTaskPlan.ps1"
+      ]
+    },
+    "test-infrastructure": {
+      "runner": "Tools/Tests/Scopes/Invoke-TestInfrastructureScope.ps1",
+      "allowedPaths": [
+        "Tools/Tests/Invoke-TestTaskPlan.ps1",
+        "Tools/Tests/Test-TestTaskPlan.ps1",
+        "Tools/Tests/Scopes/Invoke-TestInfrastructureScope.ps1"
+      ]
+    },
+    "branch-lifecycle": {
+      "runner": "Tools/Tests/Scopes/Invoke-BranchLifecycleScope.ps1",
+      "allowedPaths": [
+        "Tools/Git/Get-BranchLifecycleAudit.ps1",
+        "Tools/Tests/Test-BranchLifecycleAudit.ps1",
+        "Tools/Tests/Scopes/Invoke-BranchLifecycleScope.ps1"
+      ]
+    },
+    "private-execution-policy": {
+      "runner": "Tools/Tests/Scopes/Invoke-PrivateExecutionPolicyScope.ps1",
+      "allowedPaths": [
+        "Tools/CI/Resolve-PrivateTestExecution.ps1",
+        "Tools/Tests/Test-PrivateTestExecutionFallback.ps1",
+        "Tools/Tests/Scopes/Invoke-PrivateExecutionPolicyScope.ps1"
+      ]
+    }
+  }
+}

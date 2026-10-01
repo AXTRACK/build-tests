@@ -71,6 +71,14 @@
         "Tools/Tests/Test-AdaptiveCiHandoff.ps1",
         "Tools/Tests/Scopes/Invoke-AdaptiveCiHandoffScope.ps1"
       ]
+    },
+    "private-ci-circuit-breaker": {
+      "runner": "Tools/Tests/Scopes/Invoke-PrivateCiCircuitBreakerScope.ps1",
+      "allowedPaths": [
+        "Tools/CI/Resolve-PrivateTestExecution.ps1",
+        "Tools/Tests/Test-PrivateTestExecutionFallback.ps1",
+        "Tools/Tests/Scopes/Invoke-PrivateCiCircuitBreakerScope.ps1"
+      ]
     }
   }
 }

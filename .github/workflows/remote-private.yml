@@ -1,4 +1,5 @@
 name: remote deterministic tests
+run-name: remote tests ${{ inputs.source_repository }}@${{ inputs.source_sha }}
 
 on:
   workflow_dispatch:
@@ -25,7 +26,7 @@ permissions:
 
 concurrency:
   group: remote-tests-${{ inputs.source_repository }}-${{ inputs.source_sha }}
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   test:

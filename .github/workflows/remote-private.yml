@@ -28,33 +28,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  mark-pending:
-    runs-on: ubuntu-latest
-    timeout-minutes: 2
-    steps:
-      - name: Mark source commit pending
-        shell: pwsh
-        env:
-          SOURCE_REPOSITORY: ${{ inputs.source_repository }}
-          SOURCE_SHA: ${{ inputs.source_sha }}
-          SOURCE_TOKEN: ${{ secrets.CODEX_TEST_SOURCE_TOKEN }}
-          RUN_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
-        run: |
-          $headers = @{
-            Authorization = "Bearer $env:SOURCE_TOKEN"
-            Accept = 'application/vnd.github+json'
-            'X-GitHub-Api-Version' = '2022-11-28'
-          }
-          $body = @{
-            state = 'pending'
-            context = 'build-tests/deterministic'
-            description = 'Remote deterministic tests are running'
-            target_url = $env:RUN_URL
-          } | ConvertTo-Json
-          Invoke-RestMethod -Method Post -Uri "https://api.github.com/repos/$env:SOURCE_REPOSITORY/statuses/$env:SOURCE_SHA" -Headers $headers -ContentType 'application/json' -Body $body | Out-Null
-
   test:
-    needs: mark-pending
     strategy:
       fail-fast: false
       matrix: ${{ fromJSON(inputs.matrix) }}
@@ -86,35 +60,3 @@ jobs:
         env:
           CODEX_ROOT: ${{ github.workspace }}
         run: pwsh -NoProfile -File "${{ matrix.runner }}"
-
-  report:
-    needs:
-      - mark-pending
-      - test
-    if: always()
-    runs-on: ubuntu-latest
-    timeout-minutes: 2
-    steps:
-      - name: Report exact source status
-        shell: pwsh
-        env:
-          SOURCE_REPOSITORY: ${{ inputs.source_repository }}
-          SOURCE_SHA: ${{ inputs.source_sha }}
-          SOURCE_TOKEN: ${{ secrets.CODEX_TEST_SOURCE_TOKEN }}
-          TEST_RESULT: ${{ needs.test.result }}
-          RUN_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
-        run: |
-          $success = $env:TEST_RESULT -eq 'success'
-          $headers = @{
-            Authorization = "Bearer $env:SOURCE_TOKEN"
-            Accept = 'application/vnd.github+json'
-            'X-GitHub-Api-Version' = '2022-11-28'
-          }
-          $body = @{
-            state = $(if ($success) { 'success' } else { 'failure' })
-            context = 'build-tests/deterministic'
-            description = $(if ($success) { 'Remote deterministic tests passed' } else { "Remote deterministic tests: $env:TEST_RESULT" })
-            target_url = $env:RUN_URL
-          } | ConvertTo-Json
-          Invoke-RestMethod -Method Post -Uri "https://api.github.com/repos/$env:SOURCE_REPOSITORY/statuses/$env:SOURCE_SHA" -Headers $headers -ContentType 'application/json' -Body $body | Out-Null
-          if (-not $success) { exit 1 }

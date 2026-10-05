@@ -1,11 +1,11 @@
-$ErrorActionPreference = 'Stop'
-Set-StrictMode -Version Latest
-
 param(
     [Parameter(Mandatory)][string]$EventPath,
     [Parameter(Mandatory)][string]$PolicyPath,
     [Parameter(Mandatory)][string]$OutputPath
 )
+
+$ErrorActionPreference = 'Stop'
+Set-StrictMode -Version Latest
 
 $event = Get-Content -LiteralPath $EventPath -Raw -Encoding UTF8 | ConvertFrom-Json -Depth 20
 $policy = Get-Content -LiteralPath $PolicyPath -Raw -Encoding UTF8 | ConvertFrom-Json -Depth 20

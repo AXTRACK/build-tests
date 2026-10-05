@@ -26,6 +26,7 @@ The issue is only a request envelope. Private source is never copied into public
 - Only allowlisted actors, source repositories and profiles are accepted.
 - Checkout credentials are used only by `actions/checkout` and are not persisted.
 - `AXTRACK_TEST_SOURCE_TOKEN` is the canonical source-read secret. Use a fine-grained token owned by `AXTRACK`, grant repository access to every private source repository that the execution profiles allow, and grant only **Contents: Read-only** (plus GitHub's implicit Metadata read). `CODEX_TEST_SOURCE_TOKEN` remains a temporary compatibility fallback during migration.
+- The `chatgpt-harness` profile uses `ubuntu-latest`; Technical Architect `full` validation stays on `windows-latest` because its contract includes Windows reproducibility.
 - The requested source SHA must be an exact 40-character commit identity.
 - Request text cannot select an arbitrary runner.
 

@@ -6,7 +6,7 @@ Public deterministic execution provider for AXTRACK repositories.
 
 Portable deterministic repository validation runs here, not on private GitHub-hosted Actions.
 
-ChatGPT must submit a build-test request by creating an issue in this repository with the exact source commit SHA and an allowlisted profile. The default-branch workflow validates the actor, repository, SHA and profile before checking out private source with the read-only `CODEX_TEST_SOURCE_TOKEN`.
+ChatGPT must submit a build-test request by creating an issue in this repository with the exact source commit SHA and an allowlisted profile. The default-branch workflow validates the actor, repository, SHA and profile before checking out private source with the read-only `AXTRACK_TEST_SOURCE_TOKEN` (with `CODEX_TEST_SOURCE_TOKEN` retained only as a temporary migration fallback).
 
 Example request:
 

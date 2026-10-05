@@ -1,0 +1,89 @@
+name: ChatGPT public build-test request
+run-name: ${{ github.event.issue.title }}
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  build-test:
+    if: github.actor == 'AXTRACK' && startsWith(github.event.issue.title, '[build-test]')
+    runs-on: windows-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout trusted build-tests control plane
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: main
+          path: control
+          persist-credentials: false
+
+      - name: Resolve and authorize request
+        id: resolve
+        shell: pwsh
+        run: >
+          pwsh -NoProfile -File "control/Resolve-IssueRequest.ps1"
+          -EventPath "$env:GITHUB_EVENT_PATH"
+          -PolicyPath "control/execution-profiles.json"
+          -OutputPath "$env:GITHUB_OUTPUT"
+
+      - name: Set up Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: ${{ steps.resolve.outputs.node_version }}
+
+      - name: Checkout exact private source commit
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          repository: ${{ steps.resolve.outputs.source_repository }}
+          ref: ${{ steps.resolve.outputs.source_sha }}
+          token: ${{ secrets.CODEX_TEST_SOURCE_TOKEN }}
+          fetch-depth: 0
+          path: source
+          persist-credentials: false
+
+      - name: Verify exact source identity
+        shell: pwsh
+        run: |
+          $actual = (git -C source rev-parse HEAD).Trim()
+          if ($actual -ne '${{ steps.resolve.outputs.source_sha }}') {
+            throw "BUILD_TEST_SOURCE_IDENTITY_MISMATCH: expected=${{ steps.resolve.outputs.source_sha }} actual=$actual"
+          }
+
+      - name: Run authorized deterministic profile
+        id: test
+        continue-on-error: true
+        shell: pwsh
+        working-directory: source
+        run: pwsh -NoProfile -File "${{ steps.resolve.outputs.runner }}"
+
+      - name: Report result and close request
+        if: always()
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TEST_OUTCOME: ${{ steps.test.outcome }}
+          SOURCE_REPOSITORY: ${{ steps.resolve.outputs.source_repository }}
+          SOURCE_SHA: ${{ steps.resolve.outputs.source_sha }}
+          PROFILE: ${{ steps.resolve.outputs.profile }}
+        run: |
+          $runUrl = "https://github.com/$env:GITHUB_REPOSITORY/actions/runs/$env:GITHUB_RUN_ID"
+          $result = if ($env:TEST_OUTCOME -eq 'success') { 'PASS' } else { 'FAIL' }
+          $body = @"
+          $result
+
+          source: $env:SOURCE_REPOSITORY@$env:SOURCE_SHA
+          profile: $env:PROFILE
+          run: $runUrl
+          "@
+          gh issue comment ${{ github.event.issue.number }} --repo "$env:GITHUB_REPOSITORY" --body $body
+          gh issue close ${{ github.event.issue.number }} --repo "$env:GITHUB_REPOSITORY" --reason completed
+
+      - name: Enforce test result
+        if: steps.test.outcome != 'success'
+        shell: pwsh
+        run: throw 'PUBLIC_BUILD_TEST_FAILED'

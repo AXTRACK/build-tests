@@ -41,7 +41,7 @@ jobs:
         with:
           repository: ${{ steps.resolve.outputs.source_repository }}
           ref: ${{ steps.resolve.outputs.source_sha }}
-          token: ${{ secrets.CODEX_TEST_SOURCE_TOKEN }}
+          token: ${{ secrets.AXTRACK_TEST_SOURCE_TOKEN || secrets.CODEX_TEST_SOURCE_TOKEN }}
           fetch-depth: 0
           path: source
           persist-credentials: false

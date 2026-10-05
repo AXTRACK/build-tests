@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "requestTitlePrefix": "[build-test]",
+  "allowedActors": [
+    "AXTRACK"
+  ],
+  "profiles": {
+    "AXTRACK/technical-architect": {
+      "full": {
+        "runner": "tools/Invoke-PublicBuildTests.ps1",
+        "nodeVersion": "24.19.0"
+      }
+    },
+    "AXTRACK/Codex": {
+      "chatgpt-harness": {
+        "runner": "ChatGPT/Tests/Invoke-ExecutionHarnessTests.ps1",
+        "nodeVersion": "24.19.0"
+      }
+    }
+  }
+}

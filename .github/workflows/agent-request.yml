@@ -12,7 +12,7 @@ permissions:
 jobs:
   build-test:
     if: github.actor == 'AXTRACK' && startsWith(github.event.issue.title, '[build-test]')
-    runs-on: "${{ contains(github.event.issue.body, 'profile: chatgpt-harness') && 'ubuntu-latest' || 'windows-latest' }}"
+    runs-on: ${{ steps.resolve.outputs.runner_os }}
     timeout-minutes: 30
     steps:
       - name: Checkout trusted build-tests control plane

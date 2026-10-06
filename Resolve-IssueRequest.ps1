@@ -60,12 +60,28 @@ if ($null -eq $profileProperty) {
 $profile = $profileProperty.Value
 $runner = [string]$profile.runner
 $nodeVersion = [string]$profile.nodeVersion
+$runnerOs = [string]$profile.runnerOs
 
 if ([string]::IsNullOrWhiteSpace($runner) -or $runner.Contains('..') -or [IO.Path]::IsPathRooted($runner)) {
     throw "BUILD_TEST_RUNNER_INVALID: $runner"
 }
-if ($nodeVersion -notmatch '^\d+\.\d+\.\d+$') {
+if ($nodeVersion -notmatch '^\d+\.\d+\.\d+
+
+@(
+    "source_repository=$sourceRepository"
+    "source_sha=$sourceSha"
+    "profile=$profileName"
+    "runner=$runner"
+    "node_version=$nodeVersion"
+    "runner_os=$runnerOs"
+) | Add-Content -LiteralPath $OutputPath -Encoding UTF8
+
+Write-Host "Resolved $sourceRepository@$sourceSha profile=$profileName runner=$runner runnerOs=$runnerOs"
+) {
     throw "BUILD_TEST_NODE_VERSION_INVALID: $nodeVersion"
+}
+if (@('ubuntu-latest','windows-latest') -notcontains $runnerOs) {
+    throw "BUILD_TEST_RUNNER_OS_INVALID: $runnerOs"
 }
 
 @(

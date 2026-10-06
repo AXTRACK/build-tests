@@ -22,6 +22,12 @@
         "runner": "tools/Invoke-PublicBuildTests.ps1",
         "nodeVersion": "24.19.0"
       }
+    },
+    "AXTRACK/nas-chatgpt-mcp": {
+      "chatgpt-harness": {
+        "runner": "tools/Invoke-PublicBuildTests.ps1",
+        "nodeVersion": "22.20.0"
+      }
     }
   }
 }

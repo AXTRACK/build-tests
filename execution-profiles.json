@@ -16,6 +16,12 @@
         "runner": "ChatGPT/Tests/Invoke-ExecutionHarnessTests.ps1",
         "nodeVersion": "24.19.0"
       }
+    },
+    "AXTRACK/d365-metadata-service": {
+      "chatgpt-harness": {
+        "runner": "tools/Invoke-PublicBuildTests.ps1",
+        "nodeVersion": "24.19.0"
+      }
     }
   }
 }

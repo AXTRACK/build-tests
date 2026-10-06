@@ -28,6 +28,12 @@
         "runner": "tools/Invoke-PublicBuildTests.ps1",
         "nodeVersion": "22.20.0"
       }
+    },
+    "AXTRACK/agent-gateway": {
+      "chatgpt-harness": {
+        "runner": "tools/Invoke-PublicBuildTests.ps1",
+        "nodeVersion": "24.19.0"
+      }
     }
   }
 }

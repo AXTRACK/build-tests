@@ -8,25 +8,36 @@
     "AXTRACK/technical-architect": {
       "full": {
         "runner": "tools/Invoke-PublicBuildTests.ps1",
-        "nodeVersion": "24.19.0"
+        "nodeVersion": "24.19.0",
+        "runnerOs": "windows-latest"
       }
     },
     "AXTRACK/Codex": {
       "chatgpt-harness": {
         "runner": "ChatGPT/Tests/Invoke-ExecutionHarnessTests.ps1",
-        "nodeVersion": "24.19.0"
+        "nodeVersion": "24.19.0",
+        "runnerOs": "ubuntu-latest"
       }
     },
     "AXTRACK/d365-metadata-service": {
       "chatgpt-harness": {
         "runner": "tools/Invoke-PublicBuildTests.ps1",
-        "nodeVersion": "24.19.0"
+        "nodeVersion": "24.19.0",
+        "runnerOs": "ubuntu-latest"
       }
     },
     "AXTRACK/nas-chatgpt-mcp": {
       "chatgpt-harness": {
         "runner": "tools/Invoke-PublicBuildTests.ps1",
-        "nodeVersion": "22.20.0"
+        "nodeVersion": "22.20.0",
+        "runnerOs": "ubuntu-latest"
+      }
+    },
+    "AXTRACK/agent-gateway": {
+      "full": {
+        "runner": "tools/Invoke-PublicBuildTests.ps1",
+        "nodeVersion": "24.19.0",
+        "runnerOs": "ubuntu-latest"
       }
     }
   }

@@ -34,6 +34,12 @@
         "runner": "tools/Invoke-PublicBuildTests.ps1",
         "nodeVersion": "24.19.0"
       }
+    },
+    "AXTRACK/car": {
+      "chatgpt-harness": {
+        "runner": "tools/Invoke-PublicBuildTests.ps1",
+        "nodeVersion": "24.19.0"
+      }
     }
   }
 }

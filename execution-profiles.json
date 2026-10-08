@@ -44,6 +44,12 @@
         "runner": "tools/Invoke-PublicBuildTests.ps1",
         "nodeVersion": "24.19.0"
       }
+    },
+    "AXTRACK/home-infra": {
+      "ssh-access": {
+        "runner": "tools/Invoke-PublicBuildTests.ps1",
+        "nodeVersion": "24.19.0"
+      }
     }
   }
 }

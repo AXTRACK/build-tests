@@ -5,7 +5,7 @@
     "AXTRACK"
   ],
   "profiles": {
-    "AXTRACK/technical-architect": {
+    "AXTRACK/kb-technical-architecture": {
       "full": {
         "runner": "tools/Invoke-PublicBuildTests.ps1",
         "nodeVersion": "24.19.0"
@@ -39,13 +39,13 @@
         "nodeVersion": "24.19.0"
       }
     },
-    "AXTRACK/car": {
+    "AXTRACK/project-car": {
       "chatgpt-harness": {
         "runner": "tools/Invoke-PublicBuildTests.ps1",
         "nodeVersion": "24.19.0"
       }
     },
-    "AXTRACK/home-infra": {
+    "AXTRACK/project-home-infra": {
       "ssh-access": {
         "runner": "tools/Invoke-PublicBuildTests.ps1",
         "nodeVersion": "24.19.0"

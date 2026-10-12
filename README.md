@@ -11,9 +11,9 @@ ChatGPT must submit a build-test request by creating an issue in this repository
 Example request:
 
 ```text
-Title: [build-test] technical-architect full <short-sha>
+Title: [build-test] kb-technical-architecture full <short-sha>
 
-source_repository: AXTRACK/technical-architect
+source_repository: AXTRACK/kb-technical-architecture
 source_sha: <40-character commit SHA>
 profile: full
 ```

@@ -50,6 +50,24 @@
         "runner": "tools/Invoke-PublicBuildTests.ps1",
         "nodeVersion": "24.19.0"
       }
+    },
+    "AXTRACK/app-agent-notifications": {
+      "notifications-unit": {
+        "runner": "tools/Invoke-PublicBuildTests.ps1",
+        "nodeVersion": "24.19.0"
+      }
+    },
+    "AXTRACK/app-telegram-mcp": {
+      "telegram-unit": {
+        "runner": "tools/Invoke-PublicBuildTests.ps1",
+        "nodeVersion": "24.19.0"
+      }
+    },
+    "AXTRACK/tool-d365-ninja": {
+      "ninja-build": {
+        "runner": "tools/Invoke-PublicBuildTests.ps1",
+        "nodeVersion": "24.19.0"
+      }
     }
   }
 }

@@ -68,6 +68,12 @@
         "runner": "tools/Invoke-PublicBuildTests.ps1",
         "nodeVersion": "24.19.0"
       }
+    },
+    "AXTRACK/kb-explore": {
+      "trip-site-build": {
+        "runner": "tools/Invoke-PublicBuildTests.ps1",
+        "nodeVersion": "24.19.0"
+      }
     }
   }
 }

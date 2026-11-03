@@ -68,6 +68,12 @@
         "runner": "tools/Invoke-PublicBuildTests.ps1",
         "nodeVersion": "24.19.0"
       }
+    },
+    "AXTRACK/d365fo-cli-clean": {
+      "ninja-build": {
+        "runner": "tools/Invoke-PublicBuildTests.ps1",
+        "nodeVersion": "24.19.0"
+      }
     }
   }
 }

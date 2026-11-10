@@ -61,6 +61,10 @@
       "telegram-unit": {
         "runner": "tools/Invoke-PublicBuildTests.ps1",
         "nodeVersion": "24.19.0"
+      },
+      "telegram-acl": {
+        "runner": "tools/Invoke-PublicAclTests.ps1",
+        "nodeVersion": "24.19.0"
       }
     },
     "AXTRACK/tool-d365-ninja": {

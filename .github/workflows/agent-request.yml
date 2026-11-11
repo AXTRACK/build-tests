@@ -12,7 +12,7 @@ permissions:
 jobs:
   build-test:
     if: github.actor == 'AXTRACK' && startsWith(github.event.issue.title, '[build-test]')
-    runs-on: "${{ contains(github.event.issue.body, 'profile: chatgpt-harness') && 'ubuntu-latest' || 'windows-latest' }}"
+    runs-on: "${{ contains(github.event.issue.body, 'profile: ninja-macos') && 'macos-latest' || (contains(github.event.issue.body, 'profile: ninja-linux') || contains(github.event.issue.body, 'profile: chatgpt-harness')) && 'ubuntu-latest' || 'windows-latest' }}"
     timeout-minutes: 30
     steps:
       - name: Checkout trusted build-tests control plane
@@ -30,6 +30,14 @@ jobs:
           -EventPath "$env:GITHUB_EVENT_PATH"
           -PolicyPath "control/execution-profiles.json"
           -OutputPath "$env:GITHUB_OUTPUT"
+
+      - name: Set up .NET for Ninja CI
+        if: contains(github.event.issue.body, 'profile: ninja-')
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            8.0.x
+            10.0.x
 
       - name: Set up Node.js
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4

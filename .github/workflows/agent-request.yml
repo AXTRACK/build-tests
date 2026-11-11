@@ -32,7 +32,7 @@ jobs:
           -OutputPath "$env:GITHUB_OUTPUT"
 
       - name: Set up .NET for Ninja CI
-        if: contains(github.event.issue.body, 'profile: ninja-')
+        if: "contains(github.event.issue.body, 'profile: ninja-')"
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: |

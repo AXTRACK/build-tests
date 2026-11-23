@@ -5,6 +5,12 @@
                           "AXTRACK"
                       ],
     "profiles":  {
+    "AXTRACK/marketplace": {
+      "chatgpt-harness": {
+        "runner": "tools/Invoke-PublicBuildTests.ps1",
+        "nodeVersion": "24.19.0"
+      }
+    },
                      "AXTRACK/kb-technical-architecture":  {
                                                                "full":  {
                                                                             "runner":  "tools/Invoke-PublicBuildTests.ps1",
